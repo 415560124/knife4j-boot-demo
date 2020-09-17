@@ -36,7 +36,19 @@ public class SwaggerConfig {
                 .apiInfo(initApiInfo())
                 .groupName("V1.0")
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.rhy.knife4jbootdemo.v1"))
+                .paths(PathSelectors.any())
+                .build()
+                .securityContexts(Lists.newArrayList(initSecutityContext()))
+                .securitySchemes(Lists.<SecurityScheme>newArrayList(apiKey()));
+    }
+    @Bean("apiV2")
+    public Docket initDocketV2(){
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(initApiInfoV2())
+                .groupName("V2.0")
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.rhy.knife4jbootdemo.v2"))
                 .paths(PathSelectors.any())
                 .build()
                 .securityContexts(Lists.newArrayList(initSecutityContext()))
@@ -52,13 +64,28 @@ public class SwaggerConfig {
      */
     private ApiInfo initApiInfo(){
         return new ApiInfoBuilder()
-                .description("Knife4j接口文档示例")
-                .termsOfServiceUrl("www.rhy.com")
+                .title("Knife4j接口文档示例v1")
+                .contact("任鸿毅")
+                .description("Knife4j接口文档示例v1")
+                .termsOfServiceUrl("v1.rhy.com")
                 .version("1.0")
                 .build();
 
     }
+    /**
+     * API基本文档信息配置
+     * @return
+     */
+    private ApiInfo initApiInfoV2(){
+        return new ApiInfoBuilder()
+                .title("Knife4j接口文档示例v2")
+                .contact("王圆圆")
+                .description("Knife4j接口文档示例v2")
+                .termsOfServiceUrl("v2.rhy.com")
+                .version("2.0")
+                .build();
 
+    }
     /**
      * security上下文配置
      * @return
