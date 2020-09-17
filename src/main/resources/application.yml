@@ -1,0 +1,13 @@
+knife4j:
+  # 其他项目文档 限制:*.md文档
+  markdowns: classpath:markdown/*
+  # 屏蔽所有Swagger的相关资源
+  production: false
+  # 开启swagger的Basic认证功能，默认false
+  basic:
+    enable: true
+    # Basic认证用户名
+    username: rhy
+    # Basic认证密码
+    password: wyy
+
